@@ -1,4 +1,4 @@
-package Log;
+package progetto.programmazione;
 
 import java.io.IOException;
 import javafx.animation.PauseTransition;
