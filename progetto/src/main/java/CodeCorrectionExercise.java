@@ -1,4 +1,4 @@
-package Log;
+package progetto.programmazione;
 
 public class CodeCorrectionExercise {
     private String name;
