@@ -1,4 +1,4 @@
-package Log;
+package progetto.programmazione;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
