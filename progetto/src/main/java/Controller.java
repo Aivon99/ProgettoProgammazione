@@ -1,4 +1,4 @@
-package Log;
+package progetto.programmazione;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
