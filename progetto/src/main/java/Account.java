@@ -1,4 +1,4 @@
-package Log;
+package progetto.programmazione;
 public class Account {
     private String nome;
     private String email;
