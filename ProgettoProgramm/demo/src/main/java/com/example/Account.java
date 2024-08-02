@@ -1,4 +1,4 @@
-package progetto.programmazione;
+package com.example;
 public class Account {
     private String nome;
     private String email;
