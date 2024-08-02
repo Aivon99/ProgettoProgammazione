@@ -1,4 +1,4 @@
-package progetto.programmazione;
+package com.example;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
