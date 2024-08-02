@@ -1,4 +1,4 @@
-package progetto.programmazione;
+package com.example;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
