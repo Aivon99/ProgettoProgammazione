@@ -1,4 +1,4 @@
-package progetto.programmazione;
+package com.example;
 
 import java.io.IOException;
 import javafx.animation.PauseTransition;
