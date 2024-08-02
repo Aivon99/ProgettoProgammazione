@@ -1,4 +1,4 @@
-package progetto.programmazione;
+package com.example;
 
 import java.io.FileWriter;
 import java.io.IOException;
