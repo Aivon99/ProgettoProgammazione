@@ -1,21 +1,18 @@
 package com.example;
 
-HEAD
-public class NumberSumExercise extends Exercise {
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class NumberSumExercise extends Exercise {
+public class MultiplicationExercise extends Exercise {
 
     private int[] answers;
     private int[] correctAnswers;
     private int currentQuestionIndex;
     private int totalQuestions;
 
-    public NumberSumExercise() {
-        super("Somma di Numeri", new String[]{"Facile", "Medio", "Difficile"});
+    public MultiplicationExercise() {
+        super("Moltiplicazione di Numeri", new String[]{"Facile", "Medio", "Difficile"});
         totalQuestions = 3; // Numero totale di domande
         resetExercise();
     }
@@ -30,9 +27,9 @@ public class NumberSumExercise extends Exercise {
 
     private void generateQuestions() {
         for (int i = 0; i < totalQuestions; i++) {
-            int num1 = (int) (Math.random() * 100) + 1; // Genera un numero casuale tra 1 e 100
-            int num2 = (int) (Math.random() * 100) + 1; // Genera un secondo numero casuale
-            correctAnswers[i] = num1 + num2; // Calcola la somma e la memorizza
+            int num1 = (int) (Math.random() * 10) + 1; // Genera numeri casuali tra 1 e 10
+            int num2 = (int) (Math.random() * 10) + 1;
+            correctAnswers[i] = num1 * num2; // Calcola il prodotto e lo memorizza
         }
     }
 
@@ -63,7 +60,9 @@ public class NumberSumExercise extends Exercise {
     @Override
     public String getExerciseDetails(int index) {
         if (index >= 0 && index < totalQuestions) {
-            return "Quanto fa la somma di " + correctAnswers[index] + " e un altro numero?";
+            int num1 = correctAnswers[index] / ((int) (Math.random() * 10) + 1); // Calcola uno dei numeri
+            int num2 = correctAnswers[index] / num1; // Calcola l'altro numero
+            return "Quanto fa " + num1 + " x " + num2 + "?";
         } else {
             return "Domanda non valida.";
         }
@@ -71,7 +70,7 @@ public class NumberSumExercise extends Exercise {
 
     @Override
     public String getDescription() {
-        return "In questo esercizio, dovrai sommare numeri casuali. Ogni livello di difficoltà aumenta la complessità dei numeri da sommare.";
+        return "In questo esercizio, dovrai moltiplicare numeri casuali. Ogni livello di difficoltà aumenta la complessità dei numeri da moltiplicare.";
     }
 
     @Override
@@ -79,7 +78,7 @@ public class NumberSumExercise extends Exercise {
         String fileName = username + "_results.txt";
         try (PrintWriter writer = new PrintWriter(new FileWriter(fileName, true))) {
             writer.println("Nome Utente: " + username);
-            writer.println("Esercizio: Somma di Numeri");
+            writer.println("Esercizio: Moltiplicazione di Numeri");
             writer.println("Difficoltà: " + difficulty);
             writer.println("Risultato: " + (success ? "Superato" : "Fallito"));
             writer.println();
