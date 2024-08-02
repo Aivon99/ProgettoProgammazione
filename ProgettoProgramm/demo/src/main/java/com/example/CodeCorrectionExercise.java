@@ -1,4 +1,4 @@
-package progetto.programmazione;
+package com.example;
 
 public class CodeCorrectionExercise {
     private String name;
