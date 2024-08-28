@@ -11,8 +11,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+
 
 public class esercizioEfficienza extends Exercise {
 
@@ -23,19 +28,21 @@ public class esercizioEfficienza extends Exercise {
 
     public esercizioEfficienza() {
         super("Selezione dell'algoritmo più efficiente", new String[]{"Facile", "Medio", "Difficile"});
-
-        totalQuestions = 3; // Numero totale di domande
+      
+        totalQuestions = 3; // Numero totale di domande  
+        this.correctAnswers = new String[]{"","",""};
+        this.answers = new String[totalQuestions];
         resetExercise();
     }
 
     @Override
-    public void resetExercise() {  //TODO: da modificare 
-
+    public void resetExercise() {  //TODO: da rivedere 
+        answers = new String[totalQuestions]; // Array per le risposte dell'utente
+        correctAnswers = new String[totalQuestions]; // Array per le risposte corrette
+        currentQuestionIndex = 0;
     }
 
-    private void generateQuestions() {
-        
-    }
+    
 
     @Override
     public boolean checkAllAnswers() {
@@ -62,17 +69,31 @@ public class esercizioEfficienza extends Exercise {
         // Questo metodo può essere personalizzato ulteriormente in base alle necessità.
     }
 
+    /* Messo a commento il 28 agosto, insieme a dichiarazione abstract in Exercise.java
     @Override
     public String getExerciseDetails(int index) {
        
             return "Domanda non valida.";
         
     }
-
+     */
     @Override
-    public String getDescription() {
-        return "In questo esercizio, ti verranno presentate varie soluzioni a problemi (di ordinamento, ricerca e simili), indica quella computativamente più efficiente. In caso di parità scegli quella più efficiente a livello di memoria.";
-    }
+    public String getDescription(String difficolta) {
+        switch (difficolta) {
+            case "Facile":
+                return "Descrizione Facile";
+               
+            case "Medio":
+                return "descrizione Medio";
+             
+            case "Difficile":
+                return "Descrizione Difficile ";
+             
+            default:
+                return " "; // mi sembrava carino
+             
+        }
+    }    
 
     @Override
     public void saveResult(String username, boolean success, String difficulty) throws IOException {
@@ -86,36 +107,46 @@ public class esercizioEfficienza extends Exercise {
         }
     }
     @Override
-    public void finestraEsercizio(int index, String difficulty, VBox layout) {
-        layout.getChildren().clear();
+    public void finestraEsercizio(int index, String difficulty, VBox layout, Object[] campoInput) {
+        //TODO modifica tutto
+
+       // layout.getChildren().clear(); //Questo è quello che cancellava contatori ecc
     
-        Label exerciseLabel = new Label("Esercizio: " + getName());
-        Label difficultyLabel = new Label("Difficoltà: " + difficulty);
+        //Label exerciseLabel = new Label("Esercizio: " + getName());
+        //Label difficultyLabel = new Label("Difficoltà: " + difficulty);
     
         String fileName = getTextFile(difficulty);
         String[] snippets = readSnippetsFromFile(fileName);
+
         if (snippets == null ){
             System.out.println("snippets sono null");
         if(snippets.length != 4){
             System.out.println("Ci sono " + snippets.length +"snippet invece che i 4 attesi");
-        }
+            }
+        
         }
         if (snippets != null && snippets.length == 4) {
-            Label snippet1 = new Label("Metodo 1:\n" + snippets[0]);
-            Label snippet2 = new Label("Metodo 2:\n" + snippets[1]);
-            Label snippet3 = new Label("Metodo 3:\n" + snippets[2]);
-            Label snippet4 = new Label("Metodo 4:\n" + snippets[3]);
-    
-            layout.getChildren().addAll(exerciseLabel, difficultyLabel, snippet1, snippet2, snippet3, snippet4);
+           HBox hBox = new HBox(); //Lo utilizziamo per posizionare gli snippet uno a fianco all-altro invece che impilati 
+        hBox.setSpacing(10);  
+
+        Label snippet1 = new Label("Metodo 1:\n" + snippets[0]);
+        Label snippet2 = new Label("Metodo 2:\n" + snippets[1]);
+        Label snippet3 = new Label("Metodo 3:\n" + snippets[2]);
+        Label snippet4 = new Label("Metodo 4:\n" + snippets[3]);
+            snippet1.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 30));
+            snippet1.setTextFill(Color.web("#FFD700")); 
+        
+        hBox.getChildren().addAll(snippet1, snippet2, snippet3, snippet4);
+          
+        layout.getChildren().add(hBox); 
+            
         } else {
             System.out.println("Errore: Snippets is null or not correctly formatted.");
             Label errorLabel = new Label("Errore nel caricamento del testo dell'esercizio.");
-            layout.getChildren().addAll(exerciseLabel, difficultyLabel, errorLabel);
+            layout.getChildren().addAll( errorLabel);
         }
     }
     
-    //TODO: Problema in gestione Input/ricerca file, errore nel caricamento dell'esercizio sistematicamente, valuta testo hardcoded. 
-
     protected String getTextFile(String difficulty) {
         String basePath = "";  
         switch (difficulty.toLowerCase()) {
@@ -129,7 +160,7 @@ public class esercizioEfficienza extends Exercise {
                 return null;
         }
     }
-    protected String[] readSnippetsFromFile(String fileName) {
+    protected String[] readSnippetsFromFile(String fileName) { //TODO: modifica per importare diversi numeri di snippet di codice, numeri di esercizi per livello di difficoltà ecc. 
         if (fileName == null) {
             return null;
         }

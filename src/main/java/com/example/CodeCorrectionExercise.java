@@ -10,7 +10,7 @@ public class CodeCorrectionExercise {
         this.codeWithErrors = codeWithErrors;
         this.correctCode = correctCode;
     }
-
+    
     public String getName() {
         return name;
     }

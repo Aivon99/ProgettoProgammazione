@@ -1,7 +1,40 @@
-Metodo 1 Medio
+public Set<Integer> trovaElementiUniciConHashSet(int[] array) {
+    Set<Integer> unici = new HashSet<>();
+    for (int num : array) {
+        unici.add(num);
+    }
+    return unici;
+}
 
-Metodo 2 Medio
 
-Metodo 3 Medio
+public List<Integer> trovaElementiUniciConCicloAnnidato(int[] array) {
+    List<Integer> unici = new ArrayList<>();
+    for (int i = 0; i < array.length; i++) {
+        boolean unico = true;
+        for (int j = 0; j < unici.size(); j++) {
+            if (array[i] == unici.get(j)) {
+                unico = false;
+                break;
+            }
+        }
+        if (unico) {
+            unici.add(array[i]);
+        }
+    }
+    return unici;
+}
+
+
+public List<Integer> trovaElementiUniciConRicercaBinaria(int[] array) {
+    Arrays.sort(array); // O(n log n)
+    List<Integer> unici = new ArrayList<>();
+    for (int i = 0; i < array.length; i++) {
+        if (i == 0 || array[i] != array[i - 1]) {
+            unici.add(array[i]);
+        }
+    }
+    return unici;
+}
+
 
 Metodo 4 Medio

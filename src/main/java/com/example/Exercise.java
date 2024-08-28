@@ -105,14 +105,14 @@ public abstract class Exercise {
     }
 
     // metodi astratti
-    public abstract String getDescription();
+    public abstract String getDescription(String difficolta);
     public abstract void resetExercise();
     public abstract boolean checkAllAnswers();
     public abstract void submitAnswer(int answer);
     public abstract void handleExerciseSuspension();
-    public abstract String getExerciseDetails(int index);
+    //public abstract String getExerciseDetails(int index);
     public abstract void saveResult(String username, boolean success, String difficulty) throws IOException;
-    public abstract void finestraEsercizio(int index, String difficulty, VBox layout);
+    public abstract void finestraEsercizio(int index, String difficulty, VBox layout, Object[] campoInput);
     // Save user progress to a file
 private void saveProgress(String username) throws IOException {
     String fileName = getFileName(username); // Pass the username to get the correct file name
