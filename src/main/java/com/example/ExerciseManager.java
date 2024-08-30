@@ -186,11 +186,7 @@ public class ExerciseManager {
             difficultyLabel.setFont(Font.font("Comic Sans MS", 18));
             difficultyLabel.setTextFill(Color.web("#FFD700")); 
 
-        TextArea answerField = new TextArea();
-            answerField.setMinSize(160, 40);
-            answerField.setMaxSize(500, 60);
-        answerField.setPromptText("Inserisci la tua risposta");
-
+        
         //Bottoni e stile
         Button submitButton = new Button("Invia Risposta");
         Button exitButton = new Button("Esci dall’Esercizio");
@@ -213,8 +209,8 @@ public class ExerciseManager {
             exercise.finestraEsercizio(currentQuestionIndex[0], difficulty, core, campoInput);
            
             
-        layout.getChildren().addAll(exerciseLabel, difficultyLabel, core,
-                                     answerField, submitButton, exitButton, timerLabel);
+        layout.getChildren().addAll(exerciseLabel, difficultyLabel, core, (Node) campoInput[0], 
+                                      submitButton, exitButton, timerLabel);
     
         Scene scene = new Scene(layout, 800, 600);
         exerciseStage.setScene(scene);
@@ -227,21 +223,35 @@ public class ExerciseManager {
        
         submitButton.setOnAction(e -> {
             try {
-                String userInput = null;
-
-        if (campoInput[0] instanceof TextInputControl) {  // per il testo
-           
-            userInput = ((TextInputControl) campoInput[0]).getText();
-
-        } else if (campoInput[0] instanceof ToggleGroup) { // per scelta multipla
-            ToggleGroup group = (ToggleGroup) campoInput[0];
-
-            RadioButton selectedButton = (RadioButton) group.getSelectedToggle();
-                userInput = selectedButton.getText();
-                }
-            } catch (NumberFormatException ex) {
-                showAlert("Errore", "Inserisci una risposta valida.");
+                String userInput = letturaInput(campoInput); //metodo separato per leggere input (differenzia se risposta multipla o testo) pulisce anche i campi (deseleziona togglebar e .clear() per textArea())
+               
+                exercise.registraRisposta(userInput);
+    
+                if (currentQuestionIndex[0] < 1) { //Da codice originale, non sono sicuro di perchè 2, probabilmente serve var per numero esercizi in ogni livello di difficoltà?
+                    currentQuestionIndex[0]++;
+                    exercise.finestraEsercizio(currentQuestionIndex[0], difficulty, core, campoInput);
+                    //       updateQuestion(exercise, currentQuestionIndex[0], questionLabel); --> Da modificare 
+                   
+                } else {
+                    boolean success = exercise.checkAllAnswers();
+                    if (success) {
+                        exercise.completeDifficulty(difficulty, account.getNome());
+                        showAlert("Successo", "Hai completato correttamente tutte le domande! Livello completato.");
+                    } else {
+                        showAlert("Errore", "Non tutte le risposte sono corrette. Riprova.");
+                    }
+                    try {
+                        exercise.saveResult(account.getNome(), success, difficulty);
+                    } catch (IOException ex) {
+                        showAlert("Errore", "Impossibile salvare il risultato.");
+                    }
+                    exercise.resetExercise();
+                    exerciseStage.close();
+            }} 
+            catch (NumberFormatException ex) {
+                showAlert("Errore", "Inserisci una risposta valida."); ///TODO: mettere metodo per sanificare input (eliminarespazi, virgole, tab e a capo)
             }
+        
         });
     
         exitButton.setOnAction(e -> {
@@ -257,7 +267,28 @@ public class ExerciseManager {
             exerciseStage.close();
         });
     }
+
+    private String letturaInput(Object[] campoInput){
+        String userInput = null;
+
+        if (campoInput[0] instanceof TextInputControl) {  // per il testo
+           
+            userInput = ((TextInputControl) campoInput[0]).getText();
+           ((TextInputControl) campoInput[0]).clear();
+
+        } else if (campoInput[0] instanceof ToggleGroup) { // per scelta multipla
+            ToggleGroup group = (ToggleGroup) campoInput[0];
+
+            RadioButton selectedButton = (RadioButton) group.getSelectedToggle();
+                userInput = selectedButton.getText();
+              ((ToggleGroup) campoInput[0]).getSelectedToggle().setSelected(false);
+                }
+        return userInput;
+    }
+
     
+
+
 
     private void startTimer(Label timerLabel, String difficulty, Exercise exercise, Stage exerciseStage) {
         int timeLimit;

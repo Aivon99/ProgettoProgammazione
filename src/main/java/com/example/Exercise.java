@@ -57,7 +57,7 @@ public abstract class Exercise {
             difficultyAccess[index] = true;
             updateCompletionPercentage();
             try {
-                // Save user progress with the username
+                //Salviamo progressi utente
                 saveProgress(username);
             } catch (IOException e) {
                 System.err.println("Error saving progress: " + e.getMessage());
@@ -108,7 +108,7 @@ public abstract class Exercise {
     public abstract String getDescription(String difficolta);
     public abstract void resetExercise();
     public abstract boolean checkAllAnswers();
-    public abstract void submitAnswer(int answer);
+    public abstract void registraRisposta(String risposta);
     public abstract void handleExerciseSuspension();
     //public abstract String getExerciseDetails(int index);
     public abstract void saveResult(String username, boolean success, String difficulty) throws IOException;

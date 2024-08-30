@@ -6,31 +6,36 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javafx.geometry.Insets;
+import javafx.application.Application;
+import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
+
+
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
 
 
 public class esercizioEfficienza extends Exercise {
 
     private String[] answers;
     private String[] correctAnswers;
-    private int currentQuestionIndex;
+    private int currentQuestionIndex; //TODO: controlla se viene azzerato ecc
     private int totalQuestions;
 
     public esercizioEfficienza() {
         super("Selezione dell'algoritmo più efficiente", new String[]{"Facile", "Medio", "Difficile"});
       
         totalQuestions = 3; // Numero totale di domande  
-        this.correctAnswers = new String[]{"","",""};
+        this.correctAnswers = new String[3];
+                correctAnswers[0] = "a";
+                correctAnswers[1] = "a";
+                correctAnswers[2] = "a";
         this.answers = new String[totalQuestions];
         resetExercise();
     }
@@ -49,6 +54,9 @@ public class esercizioEfficienza extends Exercise {
         
         for (int i = 0; i < totalQuestions; i++) {
             if (answers[i] != correctAnswers[i]) {
+                    System.out.println(i);
+                    System.out.println(answers[i]);
+                    System.out.println(correctAnswers[i]); //da null
                 return false; // Restituisce false se almeno una risposta è sbagliata
             }
         }
@@ -56,10 +64,10 @@ public class esercizioEfficienza extends Exercise {
     }
 
     @Override
-    public void submitAnswer(int answer) {
+    public void registraRisposta(String risposta) {
         if (currentQuestionIndex < totalQuestions) {
-            answers[currentQuestionIndex] = ""+answer; // Registra la risposta dell'utente
-            currentQuestionIndex++;
+            answers[currentQuestionIndex] = risposta; // Registra la risposta dell'utente
+            currentQuestionIndex++; //rimane locale
         }
     }
 
@@ -108,43 +116,52 @@ public class esercizioEfficienza extends Exercise {
     }
     @Override
     public void finestraEsercizio(int index, String difficulty, VBox layout, Object[] campoInput) {
+         campoInput[0] = new TextArea();   
+            
         //TODO modifica tutto
-
-       // layout.getChildren().clear(); //Questo è quello che cancellava contatori ecc
+            // layout.getChildren().clear(); //Questo è quello che cancellava contatori ecc
     
         //Label exerciseLabel = new Label("Esercizio: " + getName());
         //Label difficultyLabel = new Label("Difficoltà: " + difficulty);
     
         String fileName = getTextFile(difficulty);
-        String[] snippets = readSnippetsFromFile(fileName);
+        String[] Potentialsnippets = readSnippetsFromFile(fileName);
+         String[] snippets = {Potentialsnippets[index], Potentialsnippets[index+1]};
 
+         /*
         if (snippets == null ){
             System.out.println("snippets sono null");
-        if(snippets.length != 4){
-            System.out.println("Ci sono " + snippets.length +"snippet invece che i 4 attesi");
-            }
+        //if(snippets.length != 4){
+          //  System.out.println("Ci sono " + snippets.length +"snippet invece che i 4 attesi");
+            //}
         
-        }
-        if (snippets != null && snippets.length == 4) {
+        }*/
+        if (snippets != null ) {
            HBox hBox = new HBox(); //Lo utilizziamo per posizionare gli snippet uno a fianco all-altro invece che impilati 
         hBox.setSpacing(10);  
-
-        Label snippet1 = new Label("Metodo 1:\n" + snippets[0]);
-        Label snippet2 = new Label("Metodo 2:\n" + snippets[1]);
-        Label snippet3 = new Label("Metodo 3:\n" + snippets[2]);
-        Label snippet4 = new Label("Metodo 4:\n" + snippets[3]);
-            snippet1.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 30));
-            snippet1.setTextFill(Color.web("#FFD700")); 
         
-        hBox.getChildren().addAll(snippet1, snippet2, snippet3, snippet4);
-          
+        int n;
+            if(difficulty == "Facile") n = 2;
+            else n=2;
+        int i = 0;
+        while (i < n) {    
+        Label codice = new Label("Metodo "+ (i+1) +":\n" + snippets[i]);
+           // codice.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 30));
+            codice.setTextFill(Color.web("#FFD700")); 
+        i++;
+        hBox.getChildren().addAll(codice);
+        }
         layout.getChildren().add(hBox); 
-            
+        //layout.getChildren().add((Node) campoInput[0]);
+      
+
         } else {
             System.out.println("Errore: Snippets is null or not correctly formatted.");
             Label errorLabel = new Label("Errore nel caricamento del testo dell'esercizio.");
             layout.getChildren().addAll( errorLabel);
+
         }
+
     }
     
     protected String getTextFile(String difficulty) {
