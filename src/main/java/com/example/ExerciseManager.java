@@ -34,7 +34,7 @@ public class ExerciseManager {
     public ExerciseManager(Account account) {
         this.account = account;
         this.exercises = new Exercise[]{
-       
+            new esercizioProva(),
             new esercizioEfficienza() // Aggiungi il nuovo esercizio qui
         };
 
@@ -209,7 +209,7 @@ public class ExerciseManager {
             exercise.finestraEsercizio(currentQuestionIndex[0], difficulty, core, campoInput);
            
             
-        layout.getChildren().addAll(exerciseLabel, difficultyLabel, core, (Node) campoInput[0], 
+        layout.getChildren().addAll(exerciseLabel, difficultyLabel, core,  
                                       submitButton, exitButton, timerLabel);
     
         Scene scene = new Scene(layout, 800, 600);
@@ -227,8 +227,9 @@ public class ExerciseManager {
                
                 exercise.registraRisposta(userInput);
     
-                if (currentQuestionIndex[0] < 1) { //Da codice originale, non sono sicuro di perchè 2, probabilmente serve var per numero esercizi in ogni livello di difficoltà?
+                if (currentQuestionIndex[0] < exercise.getNEsercizi(difficulty)-1) { //Da codice originale, non sono sicuro di perchè 2, probabilmente serve var per numero esercizi in ogni livello di difficoltà?
                     currentQuestionIndex[0]++;
+                        core.getChildren().clear(); //pulisco ciò che viene disegnato dall'esercizio
                     exercise.finestraEsercizio(currentQuestionIndex[0], difficulty, core, campoInput);
                     //       updateQuestion(exercise, currentQuestionIndex[0], questionLabel); --> Da modificare 
                    
@@ -281,6 +282,7 @@ public class ExerciseManager {
 
             RadioButton selectedButton = (RadioButton) group.getSelectedToggle();
                 userInput = selectedButton.getText();
+               // System.out.println(userInput);
               ((ToggleGroup) campoInput[0]).getSelectedToggle().setSelected(false);
                 }
         return userInput;

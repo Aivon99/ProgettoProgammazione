@@ -9,17 +9,18 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import javafx.scene.control.ProgressBar;
 
 public abstract class Exercise {
     private String name;
+    private int[] nEsercizi; //numero di esercizi per ogni livello di difficoltà
     private String[] difficulties;
     private ProgressBar progressBar;
     private double completionPercentage;
     private boolean[] difficultyAccess;
 
-    public Exercise(String name, String[] difficulties) {
+
+    public Exercise(String name, String[] difficulties, int[] nEsercizi) {
         this.name = name;
         this.difficulties = difficulties;
         this.progressBar = new ProgressBar(0);
@@ -29,20 +30,29 @@ public abstract class Exercise {
         for (int i = 0; i < difficulties.length; i++) {
             difficultyAccess[i] = false;
         }
+        this.nEsercizi = nEsercizi; //attesa Dim 3
     }
-
     public String getName() {
         return name;
-    }
-
-    public String[] getDifficulties() {
+    }  
+   public String[] getDifficulties() {
         return difficulties;
     }
-
     public ProgressBar getProgressBar() {
         return progressBar;
     }
-
+    public int getNEsercizi(String difficolta){
+        switch (difficolta) {
+            case "Facile":
+            return this.nEsercizi[0];
+        case "Medio":
+            return this.nEsercizi[1];
+        case "Difficile":
+        return this.nEsercizi[2];
+            default:
+                return 0;
+        }
+    }
     public HBox getExerciseProgressBar() {
         Label label = new Label(name);
         HBox hBox = new HBox(10);
@@ -50,7 +60,6 @@ public abstract class Exercise {
         hBox.setAlignment(Pos.CENTER_LEFT);
         return hBox;
     }
-
     public void completeDifficulty(String difficulty, String username) {
         int index = getDifficultyIndex(difficulty);
         if (index != -1) {
@@ -64,8 +73,6 @@ public abstract class Exercise {
             }
         }
     }
-    
-
     private int getDifficultyIndex(String difficulty) {
         for (int i = 0; i < difficulties.length; i++) {
             if (difficulties[i].equals(difficulty)) {
@@ -74,7 +81,6 @@ public abstract class Exercise {
         }
         return -1;
     }
-
     private void updateCompletionPercentage() {
         int completed = 0;
         for (boolean access : difficultyAccess) {
@@ -85,11 +91,25 @@ public abstract class Exercise {
         completionPercentage = (double) completed / difficulties.length;
         progressBar.setProgress(completionPercentage);
     }
-
     public double getCompletionPercentage() {
         return completionPercentage;
     }
-
+    public void setNEsercizi(String difficolta, int numero){
+        switch (difficolta) {
+            case "Facile":
+                this.nEsercizi[0] = numero;
+                break;
+            case "Medio":
+                this.nEsercizi[1] = numero;
+                break;
+            case "Difficile":
+                this.nEsercizi[2] = numero;
+                break;
+            default:
+                System.out.println("Fallito");
+                break;
+        }
+ }
     public boolean canAccessDifficulty(String difficulty) {
         int index = getDifficultyIndex(difficulty);
         switch (index) {
