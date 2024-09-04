@@ -226,15 +226,16 @@ public class ExerciseManager {
                 String userInput = letturaInput(campoInput); //metodo separato per leggere input (differenzia se risposta multipla o testo) pulisce anche i campi (deseleziona togglebar e .clear() per textArea())
                
                 exercise.registraRisposta(userInput);
-    
-                if (currentQuestionIndex[0] < exercise.getNEsercizi(difficulty)-1) { //Da codice originale, non sono sicuro di perchè 2, probabilmente serve var per numero esercizi in ogni livello di difficoltà?
+                System.out.println("contatore indice" + currentQuestionIndex[0]);
+                System.out.println("Limite" + (exercise.getNEsercizi(difficulty) - 1));
+                if (currentQuestionIndex[0] < exercise.getNEsercizi(difficulty) - 1) { 
                     currentQuestionIndex[0]++;
                         core.getChildren().clear(); //pulisco ciò che viene disegnato dall'esercizio
                     exercise.finestraEsercizio(currentQuestionIndex[0], difficulty, core, campoInput);
                     //       updateQuestion(exercise, currentQuestionIndex[0], questionLabel); --> Da modificare 
                    
                 } else {
-                    boolean success = exercise.checkAllAnswers();
+                    boolean success = exercise.checkAllAnswers(difficulty);
                     if (success) {
                         exercise.completeDifficulty(difficulty, account.getNome());
                         showAlert("Successo", "Hai completato correttamente tutte le domande! Livello completato.");
@@ -246,7 +247,7 @@ public class ExerciseManager {
                     } catch (IOException ex) {
                         showAlert("Errore", "Impossibile salvare il risultato.");
                     }
-                    exercise.resetExercise();
+              
                     exerciseStage.close();
             }} 
             catch (NumberFormatException ex) {
@@ -256,7 +257,7 @@ public class ExerciseManager {
         });
     
         exitButton.setOnAction(e -> {
-            if (!exercise.checkAllAnswers()) {
+            if (!exercise.checkAllAnswers(difficulty)) {
                 showAlert("Fallimento", "Hai abbandonato l'esercizio. Sarà considerato come fallito.");
                 try {
                     exercise.saveResult(account.getNome(), false, difficulty);
@@ -264,7 +265,7 @@ public class ExerciseManager {
                     showAlert("Errore", "Impossibile salvare il risultato.");
                 }
             }
-            exercise.resetExercise();
+         
             exerciseStage.close();
         });
     }
@@ -282,7 +283,7 @@ public class ExerciseManager {
 
             RadioButton selectedButton = (RadioButton) group.getSelectedToggle();
                 userInput = selectedButton.getText();
-               // System.out.println(userInput);
+                System.out.println(userInput);
               ((ToggleGroup) campoInput[0]).getSelectedToggle().setSelected(false);
                 }
         return userInput;

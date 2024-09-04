@@ -126,8 +126,8 @@ public abstract class Exercise {
 
     // metodi astratti
     public abstract String getDescription(String difficolta);
-    public abstract void resetExercise();
-    public abstract boolean checkAllAnswers();
+
+    public abstract boolean checkAllAnswers(String difficolta);
     public abstract void registraRisposta(String risposta);
     public abstract void handleExerciseSuspension();
     //public abstract String getExerciseDetails(int index);

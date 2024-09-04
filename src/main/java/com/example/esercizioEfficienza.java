@@ -37,24 +37,19 @@ public class esercizioEfficienza extends Exercise {
                 correctAnswers[1] = "a";
                 correctAnswers[2] = "a";
         this.answers = new String[totalQuestions];
-        resetExercise();
-    }
-
-    @Override
-    public void resetExercise() {  //TODO: da rivedere 
-        answers = new String[totalQuestions]; // Array per le risposte dell'utente
-        correctAnswers = new String[totalQuestions]; // Array per le risposte corrette
-        currentQuestionIndex = 0;
+   
     }
 
     
 
+    
+
     @Override
-    public boolean checkAllAnswers() {
+    public boolean checkAllAnswers(String Difficolta) {
         
-        for (int i = 0; i < totalQuestions; i++) {
-            if (answers[i].equals( correctAnswers[i])) {
-                    System.out.println(i);
+        for (int i = 0; i < getNEsercizi(Difficolta); i++) {
+            if (answers[i].isEmpty() || answers[i] == null ||!answers[i].equals( correctAnswers[i])) {
+                       System.out.println(i);
                     System.out.println(answers[i]);
                     System.out.println(correctAnswers[i]); //da null
                 return false; // Restituisce false se almeno una risposta è sbagliata
