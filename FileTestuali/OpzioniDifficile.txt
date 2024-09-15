@@ -1,0 +1,11 @@
+String / name / extends / super(name) / return
+String / nome / implements / super(name) / print
+String / name / extends / this.name = name / println
+
+import / Scanner / try / Double / catch / Selection
+import / Scanner / try / Int / catch / Exception
+import / Scanner / if / Int / else / Exception
+
+ListIterator / String / Iterator / Next / ListIterator / Banana / set / :
+ListIterator / String / ListIterator / Next / ListIterator / Fragola / set / ;
+IteratorList / String / ListIterator / Next / Iterator / Banana / get / ;

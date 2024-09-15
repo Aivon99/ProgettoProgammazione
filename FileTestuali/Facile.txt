@@ -1,0 +1,23 @@
+public class Main {
+  public static void main(String[] args) {
+    ... hello = "Hello World!";
+    ......................(hello);
+  }
+}
+
+public class Math {
+    public static void main(String[] args) {
+        int a = 5;
+        ... b = 10;
+        int sum = ....;
+        System.out....(...);
+    }
+}
+
+public class Loop {
+  public static void main(String[] args) {
+    ... (int i = 0; ... < 10; i..) {
+      ..................
+    }
+  }
+}

@@ -1,0 +1,11 @@
+String/System.out.println
+String/System.in.println;
+char/ System.out.println;
+
+double / a - b / print / sum
+int  / a * b / println / a + b
+int / a + b / println / sum
+
+for / i / ++ / System.out.println(i);
+while / i / ++ / System.in.println(i);
+for / i / -- / return a * b;

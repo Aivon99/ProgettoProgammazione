@@ -1,0 +1,11 @@
+1 / trim / k / 9 / i / 0 / 0 / i / j
+0 / length / j / 8 / i / 0 / 1 / i / k
+0 / length / j / 9 / i / 0 / 0 / i / j
+
+1 / factorial(n - 1) / factorial / result
+0 / factorial(n + 1); /  factorial(0); /  n
+null/ n + factorial(n - 1); / factorial / factorial
+
+7 / false / 1 / target / i / false / trovato / non trovato
+7 / false / 0 / i / target / true / trovato / non trovato
+7 / true / 0 / j / target / true / trovato / non trovato

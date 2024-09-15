@@ -1,0 +1,5 @@
+Il programma popola un matrice di interi con il numero 9 e la stampa a schermo
+
+Il programma calcola in maniera ricorsiva il fattoriale del numero 5
+
+Il programma esegue una ricerca lineare in un array di interi per trovare il valore specifico 7
