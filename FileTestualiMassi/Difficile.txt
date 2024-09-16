@@ -1,0 +1,84 @@
+public class FootballPlayer extends Person{ 
+    private ... name;
+    private int goals;
+    public FootballPlayer(String name){ 
+        this.name = ...;
+        this.goals = 0;
+    }
+    public String getName(){ 
+        return name; 
+    }
+    public int getGoals(){
+        return goals; 
+    }
+}
+public class Goalkeeper ... FootballPlayer{
+    private int goalSubiti; 
+    public Goalkeeper(String name){
+        ...;
+        this.goalSubiti = 0;
+    }
+    public Integer getGoalsSubiti(){
+        ... goalSubiti;
+    }
+}
+
+... java.util.*;
+public class Consumi{
+	public static void main(String[]args){
+		... scan = new Scanner(System.in);
+		int kilometri, litri, distanza;
+		...{
+		 	System.out.println("Inserire i km percorsi: ");
+		 	kilometri = scan.next...();
+		 	System.out.println("Inserire i litri di benzina consumati: ");
+		 	litri = scan.nextInt();
+		 	distanza = kilometri / litri;
+		 	System.out.println("La tua auto percorre " + distanza + " kilometri a litro.");
+		}
+		...(InputMismatchException e){
+		    System.out.println("Inserisci un valore numerico " );
+		}
+		catch(Arithmetic... e){
+		 	System.out.println("Non puoi non aver consumato benzina!!! " + e.getMessage());
+		}
+		System.out.println("Fine del programma.");	 
+	}
+}
+
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util....;
+public class Iteratori {
+    public static void main(String[] args) {
+        ArrayList<...> lista = new ArrayList<>();
+        lista.add("Mela");
+        lista.add("Banana");
+        lista.add("Arancia");
+        lista.add("Pera");
+        lista.add("Uva");
+        ...<String> iterator = lista.iterator();
+        while (iterator.has...()) {
+            String elemento = iterator.next();
+            System.out.println(elemento);
+        }
+        ...<String> listIterator = lista.listIterator();
+        while (listIterator.hasPrevious()) {
+            String elemento = listIterator.previous();
+            System.out.println(elemento);
+        }
+        ListIterator<String> listIteratorMod = lista.listIterator();
+        while (listIteratorMod.hasNext()) {
+            String elemento = listIteratorMod.next();
+            if (elemento.equals("...")) {
+                listIteratorMod....("Fragola");
+            }
+        }
+        System.out.println("\nLista aggiornata:");
+        for (String frutto ... lista) {
+            System.out.println(frutto);
+        }
+    }
+}
+

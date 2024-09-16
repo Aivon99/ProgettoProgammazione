@@ -1,0 +1,206 @@
+badc
+
+Dei metodi che supportino inserimento, cancellazione e ottenimento del massimo, per una applicazione che richiede spesso di trovare il valore massimo. 
+
+public class StrutturaDatiA {
+    private PriorityQueue<Integer> coda = new PriorityQueue<>(Collections.reverseOrder());
+    public void inserisci(int val) {
+        coda.add(val);
+    }
+    public void cancella(int val) {
+        coda.remove(val);
+    }
+    public int massimo() {
+        return coda.peek();
+    }
+}
+
+public class StrutturaDatiB {
+    private TreeSet<Integer> albero = new TreeSet<>();
+    public void inserisci(int val) {
+        albero.add(val);
+    }
+    public void cancella(int val) {
+        albero.remove(val);
+    }
+    public int massimo() {
+        return albero.last();
+    }
+}
+
+public class StrutturaDatiC {
+    private ArrayList<Integer> lista = new ArrayList<>();
+    public void inserisci(int val) {
+        lista.add(val);
+    }
+    public void cancella(int val) {
+        lista.remove(Integer.valueOf(val));
+    }
+    public int massimo() {
+        return Collections.max(lista);
+    }
+}
+
+public class StrutturaDatiD {
+    private int[] array = new int[1000];
+    private int indice = 0;
+    public void inserisci(int val) {
+        array[indice++] = val;
+    }
+    public void cancella(int val) {
+        for (int i = 0; i < indice; i++) {
+            if (array[i] == val) {
+                array[i] = array[--indice];
+                break;
+            }
+        }
+    }
+    public int massimo() {
+        int max = array[0];
+        for (int i = 1; i < indice; i++) {
+            if (array[i] > max) {
+                max = array[i];
+            }
+        }
+        return max;
+    }
+}
+
+dabc
+
+Un metodo che, data una grande quantità di dati "int", conta il numero di occorrenze uniche di elementi,  minimizzando il consumo di memoria.
+
+public int contaUniciA(List<Integer> dati) {
+    Set<Integer> insieme = new HashSet<>(dati);
+    return insieme.size();
+}
+
+public int contaUniciB(List<Integer> dati) {
+    Map<Integer, Integer> mappa = new HashMap<>();
+    for (int numero : dati) {
+        mappa.put(numero, mappa.getOrDefault(numero, 0) + 1);
+    }
+    return mappa.size();
+}
+
+public int contaUniciC(List<Integer> dati) {
+    int contatore = 0;
+    for (int i = 0; i < dati.size(); i++) {
+        boolean unico = true;
+        for (int j = 0; j < i; j++) {
+            if (dati.get(i).equals(dati.get(j))) {
+                unico = false;
+                break;
+            }
+        }
+        if (unico) {
+            contatore++;
+        }
+    }
+    return contatore;
+}
+
+public int contaUniciD(List<Integer> dati) {
+    BitSet bitset = new BitSet();
+    for (int numero : dati) {
+        bitset.set(numero);
+    }
+    return bitset.cardinality();
+}
+
+acbd
+
+Un metodo che, dato un array di numeri interi li ordina per ordinare numeri interi. 
+
+public void ordinaA(int[] array) {
+    int n = array.length;
+    // Costruisce l'heap (riordina l'array)
+    for (int i = n / 2 - 1; i >= 0; i--) {
+        heapify(array, n, i);
+    }
+    // Estrae gli elementi dall'heap uno alla volta
+    for (int i = n - 1; i > 0; i--) {
+        // Sposta la radice corrente alla fine
+        int temp = array[0];
+        array[0] = array[i];
+        array[i] = temp;
+        // Chiamata heapify sull'heap ridotto
+        heapify(array, i, 0);
+    }
+}
+private void heapify(int[] array, int n, int i) {
+    int largest = i; // Inizializza il più grande come radice
+    int sinistro = 2 * i + 1; // Figlio sinistro
+    int destro = 2 * i + 2; // Figlio destro
+    // Se il figlio sinistro è più grande della radice
+    if (sinistro < n && array[sinistro] > array[largest]) {
+        largest = sinistro;
+    }
+    // Se il figlio destro è più grande del più grande finora
+    if (destro < n && array[destro] > array[largest]) {
+        largest = destro;
+    }
+    // Se il più grande non è la radice
+    if (largest != i) {
+        int scambio = array[i];
+        array[i] = array[largest];
+        array[largest] = scambio;
+        // Ricorsivamente heapify il sotto-albero
+        heapify(array, n, largest);
+    }
+}
+
+public void ordinaB(int[] array) {
+    quickSort(array, 0, array.length - 1);
+}
+private void quickSort(int[] array, int inizio, int fine) {
+    if (inizio < fine) {
+        int indicePartizione = partizione(array, inizio, fine);
+        quickSort(array, inizio, indicePartizione - 1);
+        quickSort(array, indicePartizione + 1, fine);
+    }
+}
+private int partizione(int[] array, int inizio, int fine) {
+    int pivot = array[fine];
+    int i = inizio - 1;
+    for (int j = inizio; j < fine; j++) {
+        if (array[j] <= pivot) {
+            i++;
+            int temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+    }
+    int temp = array[i + 1];
+    array[i + 1] = array[fine];
+    array[fine] = temp;
+    return i + 1;
+}
+
+public void ordinaC(int[] array) {
+    // Counting Sort per numeri interi positivi
+    int max = Arrays.stream(array).max().getAsInt();
+    int[] conteggio = new int[max + 1];
+    for (int num : array) {
+        conteggio[num]++;
+    }
+    int indice = 0;
+    for (int i = 0; i < conteggio.length; i++) {
+        while (conteggio[i] > 0) {
+            array[indice++] = i;
+            conteggio[i]--;
+        }
+    }
+}
+
+public void ordinaD(int[] array) {
+    for (int i = 0; i < array.length - 1; i++) {
+        for (int j = 0; j < array.length - i - 1; j++) {
+            if (array[j] > array[j + 1]) {
+                int temp = array[j];
+                array[j] = array[j + 1];
+                array[j + 1] = temp;
+            }
+        }
+    }
+}

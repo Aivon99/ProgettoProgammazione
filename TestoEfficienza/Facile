@@ -1,0 +1,56 @@
+ab
+
+Un metodo che computi la somma di tutti i numeri da 1 ad N.
+
+public int sommaA(int N) {
+    return N * (N + 1) / 2;
+}
+
+public int sommaB(int N) {
+    int somma = 0;
+    for (int i = 1; i <= N; i++) {
+        somma += i;
+    }
+    return somma;
+}
+
+ba
+
+Un metodo che calcoli il n-esimo numero di Fibonacci.
+
+public int fibonacciA(int n) {
+    if (n <= 1) {
+        return n;
+    }
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+public int fibonacciB(int n) {
+    if (n <= 1) {
+        return n;
+    }
+    int precedente = 0, corrente = 1;
+    for (int i = 2; i <= n; i++) {
+        int temp = corrente;
+        corrente += precedente;
+        precedente = temp;
+    }
+    return corrente;
+}
+
+ba
+
+Un metodo che, data una stringa, ne inverta l'ordine dei caratteri.
+
+public String invertiA(String s) {
+    String risultato = "";
+    for (int i = s.length() - 1; i >= 0; i--) {
+        risultato += s.charAt(i);
+    }
+    return risultato;
+}
+
+public String invertiB(String s) {
+    return new StringBuilder(s).reverse().toString();
+}
+
