@@ -1,0 +1,11 @@
+Il codice fornito rappresenta un problema di modellazione e sfrutta il concetto di ereditarietà. 
+Esiste una classe "genitore" FootballPlayer con comportamenti comuni a tutti i giocatori. 
+La classe FootballPlayer viene estesa in una classe specifica Goalkeeper che ha attributi aggiuntivi come il numero di goalSubiti.
+
+Il codice fornito riguarda il calcolo del consumo di carburante di un veicolo espresso in km/litri.
+Bisogna gestire l'input dell'utente prevenendo errori, il programma deve gestire situazioni 
+eccezionali per evitare che l'esecuzione si interrompa.
+
+Il codice mostrato rappresenta un programma che utilizza iteratori per scorrere e modificare un ArrayList.
+Si utilizza un iteratore per scorrere in avanti la lista e uno per scorrere all'indietro e infine uno per 
+modificare all'interno della lista l'elemento "Banana" con l'elemento "Fragola".

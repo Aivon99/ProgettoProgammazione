@@ -1,0 +1,100 @@
+acb
+
+Metodo che, data una lista di numeri, trovi il numero duplicato.
+
+public int duplicatoA(List<Integer> lista) {
+    Set<Integer> insieme = new HashSet<>();
+    for (int numero : lista) {
+        if (!insieme.add(numero)) {
+            return numero;
+        }
+    }
+    return -1;
+}
+
+public int duplicatoB(List<Integer> lista) {
+    for (int i = 0; i < lista.size(); i++) {
+        for (int j = i + 1; j < lista.size(); j++) {
+            if (lista.get(i).equals(lista.get(j))) {
+                return lista.get(i);
+            }
+        }
+    }
+    return -1;
+}
+
+public int duplicatoC(List<Integer> lista) {
+    Collections.sort(lista);
+    for (int i = 1; i < lista.size(); i++) {
+        if (lista.get(i).equals(lista.get(i - 1))) {
+            return lista.get(i);
+        }
+    }
+    return -1;
+}
+
+acb
+
+Metodo che, data una matrice quadrata di interi, calcola la somma degli elementi sulla diagonale principale.
+
+public int sommaDiagonaleA(int[][] matrice) {
+    int somma = 0;
+    for (int i = 0; i < matrice.length; i++) {
+        somma += matrice[i][i];
+    }
+    return somma;
+}
+
+public int sommaDiagonaleB(int[][] matrice) {
+    int somma = 0;
+    for (int i = 0; i < matrice.length; i++) {
+        for (int j = 0; j < matrice[0].length; j++) {
+            if (i == j) {
+                somma += matrice[i][j];
+            }
+        }
+    }
+    return somma;
+}
+
+public int sommaDiagonaleC(int[][] matrice) {
+    return Arrays.stream(matrice)
+                 .mapToInt(riga -> riga[Arrays.asList(matrice).indexOf(riga)])
+                 .sum();
+}
+
+bac
+
+Un metodo che, date due stringhe, determina se sono una l'anagramma dell'altra. 
+
+public boolean anagrammaA(String s1, String s2) {
+    if (s1.length() != s2.length()) {
+        return false;
+    }
+    char[] arr1 = s1.toCharArray();
+    char[] arr2 = s2.toCharArray();
+    Arrays.sort(arr1);
+    Arrays.sort(arr2);
+    return Arrays.equals(arr1, arr2);
+}
+
+public boolean anagrammaB(String s1, String s2) {
+    if (s1.length() != s2.length()) {
+        return false;
+    }
+    int[] conteggio = new int[26];
+    for (int i = 0; i < s1.length(); i++) {
+        conteggio[s1.charAt(i) - 'a']++;
+        conteggio[s2.charAt(i) - 'a']--;
+    }
+    for (int count : conteggio) {
+        if (count != 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+public boolean anagrammaC(String s1, String s2) {
+    return new HashSet<>(Arrays.asList(s1.split(""))).equals(new HashSet<>(Arrays.asList(s2.split(""))));
+}

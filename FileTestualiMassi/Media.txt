@@ -1,0 +1,49 @@
+public class Matrix {
+    public static void main(String[] args) {
+        int[][] matrix = new int[3][3];
+        for (int i = ....; i < matrix....; i++) { 
+            for (int ... = 0; j < matrix[i].length; j++) {
+                matrix[i][j] = ....;
+            }
+        }
+        for (int ... = ....; i < matrix.length; i++) { 
+            for (int j = ....; j < matrix[i].length; j++) {
+                System.out.print(matrix[....][....] + " "); 
+            }
+            System.out.println(); 
+        }
+    }
+}
+
+public class Factorial {
+    public static int factorial(int n) {
+        if (n == 0) {
+            return ....; 
+        } else {
+            return n * ..........; 
+        }
+    }
+    public static void main(String[] args) {
+        int result = ..........(5); 
+        System.out.println("Fattoriale di 5: " + ....); 
+    }
+}
+
+public class LinearSearch {
+    public static void main(String[] args) {
+        int[] numbers = {1, 4, 5, 7, 9, 12};
+        int target = ....; 
+        boolean found = ....; 
+        for (int i = ....; i < numbers.length; i++) { 
+            if (numbers[....] == ....) { 
+                found = ....; 
+                break;
+            }
+        }
+        if (found) {
+            System.out.println("Numero ....!"); 
+        } else {
+            System.out.println("Numero ....."); 
+        }
+    }
+}
