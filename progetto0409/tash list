@@ -1,0 +1,12 @@
+[33m85c2657[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mnuovoRamo[m[33m, [m[1;31morigin/backup[m[33m, [m[1;32mmain[m[33m, [m[1;32mbackup[m[33m)[m HEAD@{0}: reset: moving to 85c2657
+[33m85c2657[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mnuovoRamo[m[33m, [m[1;31morigin/backup[m[33m, [m[1;32mmain[m[33m, [m[1;32mbackup[m[33m)[m HEAD@{1}: checkout: moving from main to nuovoRamo
+[33m85c2657[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mnuovoRamo[m[33m, [m[1;31morigin/backup[m[33m, [m[1;32mmain[m[33m, [m[1;32mbackup[m[33m)[m HEAD@{2}: checkout: moving from backup to main
+[33m85c2657[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mnuovoRamo[m[33m, [m[1;31morigin/backup[m[33m, [m[1;32mmain[m[33m, [m[1;32mbackup[m[33m)[m HEAD@{3}: checkout: moving from main to backup
+[33m85c2657[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mnuovoRamo[m[33m, [m[1;31morigin/backup[m[33m, [m[1;32mmain[m[33m, [m[1;32mbackup[m[33m)[m HEAD@{4}: checkout: moving from nuovoRamo to main
+[33m85c2657[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mnuovoRamo[m[33m, [m[1;31morigin/backup[m[33m, [m[1;32mmain[m[33m, [m[1;32mbackup[m[33m)[m HEAD@{5}: checkout: moving from 85c265780b871faf8dcc0d85d35c72ad6bd6d6e6 to nuovoRamo
+[33m85c2657[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mnuovoRamo[m[33m, [m[1;31morigin/backup[m[33m, [m[1;32mmain[m[33m, [m[1;32mbackup[m[33m)[m HEAD@{6}: checkout: moving from main to 85c2657
+[33m85c2657[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mnuovoRamo[m[33m, [m[1;31morigin/backup[m[33m, [m[1;32mmain[m[33m, [m[1;32mbackup[m[33m)[m HEAD@{7}: reset: moving to 85c2657
+[33m1b583a7[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{8}: checkout: moving from IvosBranch to main
+[33m1f4db15[m[33m ([m[1;32mIvosBranch[m[33m)[m HEAD@{9}: commit: committiamo sta cousa
+[33m0607f8f[m HEAD@{10}: commit (initial): Cambiato metodo showExcersiceWindow, ora ottiene Vbox problema da excersice
+[33m85c2657[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mnuovoRamo[m[33m, [m[1;31morigin/backup[m[33m, [m[1;32mmain[m[33m, [m[1;32mbackup[m[33m)[m HEAD@{12}: commit (initial): Cambiato metodo showExcersiceWindow, ora ottiene Vbox problema da excersice
